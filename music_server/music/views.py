@@ -10,4 +10,6 @@ def serve_random_music(request):
         return HttpResponse("No music files available.", status=404)
 
     random_music = random.choice(music_files)
-    return FileResponse(random_music.file)
+    file = FileResponse(random_music.file)
+    file['Content-Disposition'] = random_music.title
+    return file
